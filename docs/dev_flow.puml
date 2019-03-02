@@ -1,0 +1,59 @@
+@startuml
+hide empty description
+ [*] --> story
+state "①サービス要件決定" as story
+story: どんなサービスを作るか決める
+story: 例：勤怠管理システム
+
+story --> pb
+state "②やることリスト作成" as pb
+pb: やることリスト（issue作成）
+pb:優先順位を付ける
+
+pb --> pbi
+state "③作業タスクを作る" as pbi
+pbi:②を元に作成（issue作成）
+pbi:優先順位を付ける
+
+state "スプリント（短期間のサイクル）" as sprint {
+
+    pbi -> plan
+    state "④計画（例：毎週水曜）" as plan
+    plan: タスクをメンバに割り当てる
+
+    plan --> task
+    state "タスクの消化" as task {
+
+        state "⑤タスク実施" as do
+        do: 振られたタスクの内容をみてコーディング
+
+        do --> check: コーディング完了
+        state "⑥レビュー" as check
+        check: 完成した成果物をチェック
+        check: * ちゃんと動くか？
+        check: * 機能に過不足はないか？
+        check: * コードに不満はないか？
+
+        check --> do: 問題あればフィードバック
+
+        check --> close: 複数人がレビューOKなら
+        state "⑦タスク完了" as close
+        close: issueクローズ
+
+    }
+    task --> release: 完了したタスクのソース
+    state "⑧リリース" as release
+    release: 例：毎週火曜
+
+    task --> action
+    state "⑨振り返り（例：毎週水曜）" as action
+    action: * (keep)今後も続けたいやって良かったことは？
+    action: * (Problem)問題や課題になったことは？
+    action: * (Try)改善したほうがよいことは？
+    action: 上記を元に②や③を作成・編集
+    action --> plan
+
+}
+sprint: 例：1週間
+
+@enduml

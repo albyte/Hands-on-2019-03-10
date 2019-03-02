@@ -1,0 +1,15 @@
+@startuml
+:開発メンバー: as User
+(<img:images/github.png>GitHub) as Github
+
+package "PC" {
+    (<img:images/phpstorm.png>PhpStorm) as PhpStorm
+    (<img:images/docker.png>Docker) as Docker
+    PhpStorm --> Github: issueによるタスク管理
+    PhpStorm --> Github: ソース＆ドキュメント管理
+
+    PhpStorm --> Docker: 開発環境での動作確認
+}
+User --> PhpStorm
+
+@enduml

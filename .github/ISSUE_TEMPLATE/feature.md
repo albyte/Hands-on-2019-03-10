@@ -1,6 +1,6 @@
 ---
-name: 機能改善
-about: 機能改善用テンプレート
+name: 機能
+about: 機能追加用テンプレート
 title: "【改善】"
 labels: ''
 assignees: ''

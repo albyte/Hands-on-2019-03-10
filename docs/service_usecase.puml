@@ -1,0 +1,11 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor "ユーザ" AS user
+rectangle "勤怠管理システム" {
+  user --> (ログイン)
+  user --> (出勤打刻)
+  user --> (退勤打刻)
+  user --> (勤務状況確認)
+}
+@enduml

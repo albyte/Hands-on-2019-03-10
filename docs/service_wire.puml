@@ -1,0 +1,35 @@
+@startuml
+(*) --> "
+{{
+    salt
+    {+
+        <b>"勤怠管理システム"
+          アカウント  :  "account"
+          ==
+          パスワード : "Password"
+          ==
+          [  ログイン   ]
+    }
+}}
+" as login
+login -down->"
+{{
+salt
+    {+
+        3/11(月)
+          09:00
+          [出勤]
+    }
+}}
+" as in
+login -down-> "
+{{
+salt
+    {+
+        3/11(月)
+          18:28
+          [退勤]
+    }
+}}
+" as out
+@enduml
