@@ -1,59 +1,75 @@
 @startuml
 hide empty description
- [*] --> story
+
+[*] --> story
 state "①サービス要件決定" as story
 story: どんなサービスを作るか決める
 story: 例：勤怠管理システム
 
 story --> pb
-state "②やることリスト作成" as pb
-pb: やることリスト（issue作成）
-pb:優先順位を付ける
-
-pb --> pbi
-state "③作業タスクを作る" as pbi
-pbi:②を元に作成（issue作成）
-pbi:優先順位を付ける
+state "②ほしい機能リスト作成" as pb
+pb: ほしい機能リスト（issue作成）
+pb: 優先順位を付ける
+pb: コスト見積もり
 
 state "スプリント（短期間のサイクル）" as sprint {
 
-    pbi -> plan
-    state "④計画（例：毎週水曜）" as plan
-    plan: タスクをメンバに割り当てる
+    pb -right-> plan
+    state "③計画（例：毎週水曜）" as plan {
+        state "ほしい機能を選定" as select
+        select: ②から今回のスプリントで実装したい機能を選ぶ
 
-    plan --> task
-    state "タスクの消化" as task {
-
-        state "⑤タスク実施" as do
-        do: 振られたタスクの内容をみてコーディング
-
-        do --> check: コーディング完了
-        state "⑥レビュー" as check
-        check: 完成した成果物をチェック
-        check: * ちゃんと動くか？
-        check: * 機能に過不足はないか？
-        check: * コードに不満はないか？
-
-        check --> do: 問題あればフィードバック
-
-        check --> close: 複数人がレビューOKなら
-        state "⑦タスク完了" as close
-        close: issueクローズ
+        select --> task
+        state "④タスク作成" as task
+        task: 選定した②をタスクに細分化する
+        task: タスクをメンバに割り当てる
 
     }
-    task --> release: 完了したタスクのソース
+    plan: ２周目以降は、再計画
+
+    plan --> do
+    state "⑤タスク実施" as do {
+
+        state "コーディング" as code
+        code: 振られたタスクの内容をみてコーディング
+
+        code --> rv: コーディング完了
+        state "ソースレビュー" as rv
+        rv: * コードは正しく動作しているか（テストOKか？）
+        rv: * 他に良い書き方はないか？
+
+        rv --> code: 問題あればフィードバック
+
+        rv --> close: 複数人がソースレビューOKなら
+        state "タスク完了" as close
+        close: ④タスクのクローズ
+
+    }
+    daily --> do
+    state "朝会（毎朝）" as daily
+    daily: 進捗を簡単に報告
+    daily: * 昨日やったこと
+    daily: * 今日やること
+    daily: * 障害になっていること
+
+    do -down-> check
+    state "⑥スプリントレビュー（例：毎週火曜）" as check
+    check: 完成した機能をデモ
+    check: うまく行ったこと、うまく行かなかったこと、解決方法
+    check: 次に何をするかを皆で議論
+
+    check --> release: 完了した機能
     state "⑧リリース" as release
     release: 例：毎週火曜
 
-    task --> action
-    state "⑨振り返り（例：毎週水曜）" as action
+    check --> action
+    state "⑨振りかえり（例：毎週水曜）" as action
+    action: 今回のスプリントの行程に対しての総括
     action: * (keep)今後も続けたいやって良かったことは？
     action: * (Problem)問題や課題になったことは？
     action: * (Try)改善したほうがよいことは？
-    action: 上記を元に②や③を作成・編集
     action --> plan
 
 }
 sprint: 例：1週間
-
 @enduml

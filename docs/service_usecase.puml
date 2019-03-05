@@ -4,8 +4,8 @@ skinparam packageStyle rectangle
 actor "ユーザ" AS user
 rectangle "勤怠管理システム" {
   user --> (ログイン)
-  user --> (出勤打刻)
-  user --> (退勤打刻)
+  user --> (出退勤打刻)
   user --> (勤務状況確認)
+  user --> (設定)
 }
 @enduml
