@@ -1,7 +1,7 @@
 ---
 name: 作業タスク
 about: 作業タスク（ほしい機能のサブタスク）テンプレート
-title: ''
+title: "【#1 機能名】タスク名"
 labels: タスク
 assignees: ''
 
