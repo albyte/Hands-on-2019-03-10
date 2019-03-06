@@ -40,7 +40,7 @@ alt ④スプリント
         ⑥ほしい機能を選定
         end note
 
-        Owner --> Issue: 「ほしい機能」issueを親として「タスク」issueを作成
+        User --> Issue: 「ほしい機能」issueを親として「タスク」issueを作成
         note left
         ⑦タスク作成
         end note
@@ -56,7 +56,7 @@ alt ④スプリント
         User ---> Branch : タスク切り替えにより自動でブランチ作成（※ローカルGit内）
         User --> Pr: 完了したらPullRequestを作成
 
-        Owner --> Pr: PullRequestにレビュー結果をコメント
+        User --> Pr: PullRequestにレビュー結果をコメント
         note left
         ⑩ソースレビュー
         end note
@@ -73,18 +73,18 @@ alt ④スプリント
     ⑫朝会
     end note
 
-    Owner --> Issue: 「ほしい機能」issueのレビュー欄にコメント
+    User --> Issue: 「ほしい機能」issueのレビュー欄にコメント
     note left
     ⑬スプリントレビュー
     end note
 
-    Owner --> Pr: マージ
+    Owner --> Pr: リリースブランチ作成
     note left
     ⑭リリース
     end note
     Owner --> Srv: リリース
 
-    Owner --> Issue: 「振り返り」issueを作成して、振り返りでの内容を記載
+    User --> Issue: 「振り返り」issueを作成して、振り返りでの内容を記載
     note left
     ⑮振り返り
     end note
