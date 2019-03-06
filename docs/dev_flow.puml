@@ -37,16 +37,19 @@ state "④スプリント（短期間のサイクル）" as sprint {
 
         state "⑨コーディング" as code
         code: 振られたタスクの内容をみてコーディング
+        code: 完了したらPullRequestを作成
 
         code --> rv: コーディング完了
         state "⑩ソースレビュー" as rv
         rv: * コードは正しく動作しているか（テストOKか？）
         rv: * 他に良い書き方はないか？
+        rv: レビュー結果をPullRequestにコメント
 
         rv --> code: 問題あればフィードバック
 
         rv --> close: 複数人がソースレビューOKなら
         state "⑪タスク完了" as close
+        close: PullRequestをマージ
         close: ⑦タスクのクローズ
 
     }

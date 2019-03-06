@@ -1,0 +1,95 @@
+@startuml
+'hide footbox
+
+actor "プロダクトオーナー" as Owner
+actor "メンバー" as User
+
+box "<img src=images/github.png>"
+	participant "Repositories" as Repositories
+	participant  "Projects" as Projects
+	participant "Settings" as Settings
+	participant "Issue" as Issue
+	participant "Branch" as Branch
+	participant "Pull Request" as Pr
+end box
+
+participant "サーバ" as Srv
+
+Owner --> Repositories: リポジトリ作成
+note left
+①サービス要件決定
+end note
+Owner --> Projects: 「New Project」でプロジェクト作成
+Owner --> Projects: 「Add Columns」で「実施する機能」を追加
+
+Owner --> Settings: 「Add Collaborators」でリポジトリにメンバーを追加
+note left
+②チーム結成
+end note
+
+Owner --> Issue: 「ほしい機能」issueを作成
+note left
+③ほしい機能リスト作成
+end note
+
+alt ④スプリント
+    Owner --> Issue: 「New Milestone」でスプリント作成「YY/MM-YY/MM」
+    alt ⑤計画
+        Owner --> Projects: 「add cards」で「実施する機能」columnに\n「ほしい機能」issueを追加
+        note left
+        ⑥ほしい機能を選定
+        end note
+
+        Owner --> Issue: 「ほしい機能」issueを親として「タスク」issueを作成
+        note left
+        ⑦タスク作成
+        end note
+        Owner --> Projects: 「タスク」issueをMilestoneに追加
+        Owner --> Issue: 「タスク」issueに担当者をアサイン
+    end
+
+    alt ⑧タスク実施
+        Issue --> User : PhpStormからタスク切り替え
+        note left
+        ⑨コーディング
+        end note
+        User ---> Branch : タスク切り替えにより自動でブランチ作成（※ローカルGit内）
+        User --> Pr: 完了したらPullRequestを作成
+
+        Owner --> Pr: PullRequestにレビュー結果をコメント
+        note left
+        ⑩ソースレビュー
+        end note
+
+        Owner --> Pr: PullRequestをマージ
+        note left
+        ⑪タスク終了
+        end note
+        Owner --> Issue: 「タスク」issueをクローズ
+    end
+
+    User --> Projects: 進捗と状況を確認
+    note left
+    ⑫朝会
+    end note
+
+    Owner --> Issue: 「ほしい機能」issueのレビュー欄にコメント
+    note left
+    ⑬スプリントレビュー
+    end note
+
+    Owner --> Pr: マージ
+    note left
+    ⑭リリース
+    end note
+    Owner --> Srv: リリース
+
+    Owner --> Issue: 「振り返り」issueを作成して、振り返りでの内容を記載
+    note left
+    ⑮振り返り
+    end note
+
+
+end
+
+@enduml
