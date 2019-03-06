@@ -1,6 +1,6 @@
 ---
 name: 作業タスク
-about: 作業タスクテンプレート
+about: 作業タスク（ほしい機能のサブタスク）テンプレート
 title: ""
 labels: 'S'
 assignees: ''
