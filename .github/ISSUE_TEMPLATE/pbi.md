@@ -1,8 +1,8 @@
 ---
 name: ほしい機能
 about: ほしい機能テンプレート
-title: ""
-labels: 'P'
+title: ''
+labels: 機能
 assignees: ''
 
 ---

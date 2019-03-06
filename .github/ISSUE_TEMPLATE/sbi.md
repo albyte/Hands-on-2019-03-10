@@ -1,11 +1,12 @@
 ---
 name: 作業タスク
 about: 作業タスク（ほしい機能のサブタスク）テンプレート
-title: ""
-labels: 'S'
+title: ''
+labels: ''
 assignees: ''
 
 ---
+
 # 要望ID
 
 # 概要
