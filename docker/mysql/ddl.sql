@@ -13,14 +13,13 @@ CREATE TABLE users
   status TINYINT(1) DEFAULT 0 COMMENT '状態',
   created DATETIME COMMENT '作成日時',
   updated DATETIME COMMENT '更新日時'
-) COMMENT 'ユーザテーブル';
+) COMMENT 'アカウントテーブル';
 
 CREATE TABLE times
 (
   id INT PRIMARY KEY AUTO_INCREMENT,
   user_id INT COMMENT 'ユーザID',
   target_dt DATE COMMENT '対象日',
-
   start_dt DATETIME COMMENT '出勤日時',
   end_dt DATETIME COMMENT '退勤日時',
   created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '作成日時',

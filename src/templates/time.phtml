@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8"/>
+    <title>出退勤</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/js/moment_ja.js"></script>
+<body>
+<div class="container">
+    <form method="post">
+        <div id="workManagement">
+            <div class="row justify-content-md-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <h1>{{ user.login_id }} さん</h1>
+                    </div>
+                    <div class="form-group">
+                        <h3>{{ tc.date }}</h3>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" v-model="tc.start_time"
+                                   aria-label="Text input with checkbox">
+                            <span class="input-group-addon"> ～ </span>
+                            <input type="text" class="form-control" v-model="tc.end_time"
+                                   aria-label="Text input with checkbox">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-primary">出勤</button>
+                    </div>
+                    <!--<div id="date">-->
+                    <!--<div class="row">-->
+                    <!--<span class="label">現在日付:</span> <span class="data">{{now_date}}</span>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<span class="label">提出締切： </span> <span class="data">{{gga_submission_remain_days * -1}} </span>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<span class="label">発表： </span> <span class="data">{{gga_presentaion_remain_days * -1}} </span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--
+    出勤と退勤ボタンの表示
+    退勤の非活性　出勤ボタン押下時は活性させる
+    時間のカウントアップ
+    （出勤）時間をクリックで編集可能
+
+    -->
+    <script>
+        let vue = new Vue({
+            el: '#workManagement',
+            data: {
+                "result": "ok",
+                "user": {
+                    "login_id": "<?=$login_id?>",
+                },
+                "tc": {
+                    "date": "<?=$date?>",
+                    "start_time": moment().format('HH:mm:ss'),
+                    "end_time": "",
+                },
+                "attendance": {
+                    "go": "出勤",
+                    "back": "退勤"
+                }
+            },
+            // methods:{
+            //     getDate:function(){
+            //         return this.datetime.date
+            //     },
+            //     setCurrent:function(){
+            //          this.datetime.date = moment().format('YYYY-MM-DD HH:mm:ss')
+            //     }
+            // }
+        });
+        setInterval(function () {
+            vue.tc.start_time = moment().format('HH:mm:ss')
+        }, 1000)
+    </script>
+
+</body>
+</html>
