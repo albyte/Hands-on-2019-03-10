@@ -29,6 +29,8 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
      * @param string $requestUri the request URI
      * @param array|object|null $requestData the request data
      * @return \Slim\Http\Response
+     * @throws \Slim\Exception\MethodNotAllowedException
+     * @throws \Slim\Exception\NotFoundException
      */
     public function runApp($requestMethod, $requestUri, $requestData = null)
     {
@@ -69,6 +71,9 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
         require __DIR__ . '/../../src/routes.php';
 
         // Process the application
+        /**
+         * @var $response \Slim\Http\Response
+         */
         $response = $app->process($request, $response);
 
         // Return the response

@@ -1,10 +1,112 @@
-<!DOCTYPE html>
-<html lang="ja">
+<!doctype html>
+<!--suppress ALL -->
+<html lang="jp">
+
 <head>
-    <meta charset="UTF-8">
-    <title>login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-with, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="content-type" content="text/html; charset = UTF-8">
+    <title>勤怠管理ログイン</title>
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
 </head>
 <body>
+<div id="app">
+    <template>
+        <b-container class="bv-example-row">
+            <b-row>
+                <b-col>
+                    <b-form @submit.prevent>
+                        <b-form-group
+                                id="groupEmail"
+                                label="メールアドレス"
+                                label-for="textEmail"
+                                description="説明〇〇〇〇〇〇〇〇〇"
+                        >
+                            <b-form-input
+                                    id="textEmail"
+                                    type="email"
+                                    v-model="form.email"
+                                    required
+                                    placeholder="メールアドレスを入力してください"/>
+                        </b-form-group>
+                        <b-form-group id="groupPassword" label="パスワード" label-for="textPassword">
+                            <b-input
+                                    id="textPassword"
+                                    type="password"
+                                    v-model="form.password"
+                                    aria-describedby="passwordHelpBlock"/>
+                            <b-form-text id="passwordHelpBlock">
+                                Your password must be 8-20 characters long, contain letters and numbers, and must not
+                                contain spaces, special characters, or emoji.
+                            </b-form-text>
+                        </b-form-group>
 
+                        <b-button type="submit" variant="primary" v-on:click="checkLogin">ログイン</b-button>
+
+                    </b-form>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
+                    <div>{{ form.email }}</div>
+                    <div>{{ form.password }}</div>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
+                    <b-alert variant="danger" v-model="alert" show></b-alert>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
+                    <b-alert variant="success" v-model="message" show></b-alert>
+                </b-col>
+            </b-row>
+        </b-container>
+    </template>
+</div>
+<script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
+<script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        name: 'login',
+        data: function () {
+            return {
+                form: {
+                    email: '',
+                    password: ''
+                },
+                message: '',
+                alert: ''
+            }
+        },
+        methods: {
+            checkLogin: function (event) {
+                // var nextPage = this.$route.query.next
+                // if (nextPage === undefined) {
+                //     nextPage = 'PageA'
+                // }
+                // console.log(nextPage)
+
+                // checkloginイベント(htmlファイル内で定義している)の内容を記述
+                var correctLoginName = 'a@a.a'
+                var correctPassword = 'a'
+                console.log(this.form.emal)
+                if (correctLoginName === this.form.emal &&
+                    correctPassword === this.form.password) {
+                    // document.getElementById('loginResult').innerHTML = 'Login Success !'
+                    // this.$router.push({name: nextPage, query: {auth: 'authenticated'}})
+                    this.message = 'Login Success'
+                } else {
+                    this.alert = 'Login Failed !'
+                }
+            }
+        }
+    });
+</script>
 </body>
+
 </html>
